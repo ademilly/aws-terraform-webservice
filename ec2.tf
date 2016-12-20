@@ -10,6 +10,10 @@ variable "key_name" {
     description             = "EC2 Key name"
 }
 
+variable "iam_instance_profile" {
+    description             = "IAM instance profile name"
+}
+
 variable "user_data" {
     description             = "Launch script"
 }
@@ -25,7 +29,7 @@ resource "aws_instance" "web" {
     key_name                = "${var.key_name}"
     vpc_security_group_ids  = ["${aws_security_group.web_security.id}"]
 
-    iam_instance_profile    = "dev-machines"
+    iam_instance_profile    = "${var.iam_instance_profile}"
 
     tags {
         Name                = "${var.name}"
