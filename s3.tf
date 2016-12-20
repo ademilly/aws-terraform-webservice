@@ -2,8 +2,8 @@ variable "s3-bucket" {
     description = "S3 Bucket"
 }
 
-variable "s3-key_dir" {
-    description = "Path to S3 key 'directory'"
+variable "s3-key" {
+    description = "S3 key"
 }
 
 variable "physical_res" {
@@ -13,7 +13,7 @@ variable "physical_res" {
 
 resource "aws_s3_bucket_object" "object" {
     bucket      = "${var.s3-bucket}"
-    key         = "${var.s3-key_dir}/${var.physical_res}"
+    key         = "${var.s3-key}"
     source      = "${var.physical_res}"
     etag        = "${md5(file("${var.physical_res}"))}"
 }
